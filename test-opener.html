@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <script type="text/javascript" src="postmessage-little-helper.js"></script>
+    <script type="text/javascript">
+      var url = window.location.href.replace('test-opener', 'test-opened'),
+          popup = window.open(url);
+      setTimeout(function() { 
+          new PMLH(popup).sendMessage({theAnswer: 42}, url, 'pmlh:answer');
+      }, 2000);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
