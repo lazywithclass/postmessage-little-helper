@@ -17,7 +17,12 @@
 (function(context) {
   
   function PMLH (popup) { 
-    this.popup = popup;
+    if (popup) {
+      popup.addEventListener('beforeunload', function(e) {
+        window.dispatchEvent(new CustomEvent('pmlh:internal:closed', {}));
+      });
+      this.popup = popup;
+    }
   }
 
   context.PMLH = context.PMLH || PMLH;
