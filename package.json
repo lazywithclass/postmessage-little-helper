@@ -1,6 +1,6 @@
 {
   "name": "postmessage-little-helper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A small set of functions that helps making windows talk to each other",
   "main": "index.js",
   "scripts": {

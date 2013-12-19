@@ -18,11 +18,17 @@
   
   function PMLH (popup) { 
     if (popup) {
-      popup.addEventListener('beforeunload', function(e) {
-        window.dispatchEvent(new CustomEvent('pmlh:internal:closed', {}));
-      });
       this.popup = popup;
+      setupBeforeunload(popup);
     }
+  }
+
+  function setupBeforeunload (popup) {
+    if (!popup) return;
+
+    popup.addEventListener('beforeunload', function(e) {
+      window.dispatchEvent(new CustomEvent('pmlh:internal:closed', { detail: {} }));
+    });
   }
 
   context.PMLH = context.PMLH || PMLH;
@@ -30,6 +36,7 @@
 
   PMLH.prototype.setPopup = function(popup) {
     this.popup = popup;
+    setupBeforeunload(popup);
   };
 
   PMLH.prototype.sendMessage = function(detail, url, eventName) {
@@ -52,3 +59,4 @@
   } 
 
 })(window);
+
