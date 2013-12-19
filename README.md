@@ -7,6 +7,9 @@ A very small library that helps passing information between two windows using ev
 Messages are passed using `window.postMessage` and then dispatched as events.
 It should be easier to handle different behaviours in this way, without using tons of `if`.
 
+Whenever the popup window is closed a 'pmlh:internal:closed' event is dispatched on the parent window.
+So it is possible to get notified and take action when that happens.
+
 ### Example
 
 A simple example showing how to use the library
