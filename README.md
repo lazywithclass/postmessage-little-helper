@@ -7,8 +7,10 @@ A very small library that helps passing information between two windows using ev
 Messages are passed using `window.postMessage` and then dispatched as events.
 It should be easier to handle different behaviours in this way, without using tons of `if`.
 
-Whenever the popup window is closed a 'pmlh:internal:closed' event is dispatched on the parent window.
+Whenever the popup window is closed a `pmlh:internal:closed` event is dispatched on the parent window.
 So it is possible to get notified and take action when that happens.
+
+When in the popup window `popup.onload` gets called a `pmlh:internal:onload` event is dispatched on the parent window.
 
 ### Example
 
@@ -27,7 +29,8 @@ A simple example showing how to use the library
     console.log(event.detail.theAnswer)
   });
 ```
-You're not forced to use the pmlh part as event name, but I think that helps adding clarity, specially if you're dealing with a lot of event listeners
+
+You're not forced to use the pmlh part as event name, but I think that helps adding clarity, specially if you're dealing with a lot of event listeners.
 For a working example play with `test-opener.html` and `test-opened.html`, remember to allow popups.
 
 ### Installation

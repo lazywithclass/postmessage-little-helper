@@ -26,6 +26,10 @@
   function setupBeforeunload (popup) {
     if (!popup) return;
 
+    popup.onload = function() {
+      window.dispatchEvent(new CustomEvent('pmlh:internal:onload', { detail: {} }));
+    };
+    
     popup.addEventListener('beforeunload', function(e) {
       window.dispatchEvent(new CustomEvent('pmlh:internal:closed', { detail: {} }));
     });
