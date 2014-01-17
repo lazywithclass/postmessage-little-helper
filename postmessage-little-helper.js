@@ -19,11 +19,11 @@
   function PMLH (popup) { 
     if (popup) {
       this.popup = popup;
-      setupBeforeunload(popup);
+      setupInternal(popup);
     }
   }
 
-  function setupBeforeunload (popup) {
+  function setupInternal (popup) {
     if (!popup) return;
 
     popup.onload = function() {
@@ -40,7 +40,7 @@
 
   PMLH.prototype.setPopup = function(popup) {
     this.popup = popup;
-    setupBeforeunload(popup);
+    setupInternal(popup);
   };
 
   PMLH.prototype.sendMessage = function(detail, url, eventName) {
@@ -48,6 +48,11 @@
       eventName: validateEventName(eventName),
       detail: detail
     }, url);
+  };
+
+  PMLH.sendMessageToOpener = function(detail, eventName) {
+    var event = new CustomEvent(eventName, { detail: detail });
+    this.popup.opener.dispatchEvent(event);
   };
 
   function handleMessageReceived (postMessageEvent) {
